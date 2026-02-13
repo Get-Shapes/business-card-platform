@@ -112,17 +112,20 @@ export const EditorView: React.FC<EditorViewProps> = ({ data, onChange }) => {
                     {/* Helper function to handle email change */}
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                        <div className="flex items-center">
-                            <input
-                                type="text"
-                                value={data.email.split('@')[0]}
-                                onChange={(e) => handleChange('email', `${e.target.value}@get-shapes.com`)}
-                                className="flex-1 px-4 py-2 rounded-l-xl border border-gray-200 focus:ring-2 focus:ring-blue-500 outline-none border-r-0"
-                                placeholder="name"
-                            />
-                            <span className="px-4 py-2 bg-gray-100 border border-gray-200 rounded-r-xl text-gray-500 font-medium">
-                                @get-shapes.com
-                            </span>
+                        <div className="flex flex-col gap-2">
+                            <div className="flex items-center">
+                                <input
+                                    type="text"
+                                    value={data.email.split('@')[0]}
+                                    onChange={(e) => handleChange('email', `${e.target.value}@get-shapes.com`)}
+                                    className="flex-1 px-4 py-2 rounded-l-xl border border-gray-200 focus:ring-2 focus:ring-blue-500 outline-none border-r-0"
+                                    placeholder="name"
+                                />
+                                <span className="px-4 py-2 bg-gray-100 border border-gray-200 rounded-r-xl text-gray-500 font-medium whitespace-nowrap">
+                                    @get-shapes.com
+                                </span>
+                            </div>
+                            <p className="text-xs text-gray-500">Your professional Shapes email address.</p>
                         </div>
                     </div>
 

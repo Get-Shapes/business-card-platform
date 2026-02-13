@@ -26,7 +26,7 @@ export const CardView: React.FC<CardViewProps> = ({ data }) => {
                 }}
             >
                 {/* Cover Image */}
-                <div className="h-48 w-full relative">
+                <div className="h-32 w-full relative">
                     <img src={data.coverUrl} alt="Cover" className="w-full h-full object-cover" />
                     <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/20"></div>
                 </div>
