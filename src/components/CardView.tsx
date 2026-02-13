@@ -94,7 +94,10 @@ export const CardView: React.FC<CardViewProps> = ({ data }) => {
                             className="mt-8 w-full py-4 rounded-xl text-white font-semibold shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2"
                             style={{ background: theme.primaryColor }}
                         >
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
                             Save Contact
                         </button>
 
@@ -111,7 +114,7 @@ export const CardView: React.FC<CardViewProps> = ({ data }) => {
                                         <span className="ml-4 font-medium text-gray-700 group-hover:text-gray-900">{link.label}</span>
                                         <ExternalLink size={14} className="ml-auto text-gray-400 group-hover:text-gray-600" />
                                     </a>
-                                )
+                                );
                             })}
                         </div>
                     </div>
