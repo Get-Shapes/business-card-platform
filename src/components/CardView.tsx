@@ -1,12 +1,9 @@
 import React from 'react';
 import type { ProfileData } from '../data/initialData';
-import { getIcon } from '../utils/iconMap';
-import { Phone, Mail, Globe, Share2, ExternalLink } from 'lucide-react';
+import { IconMap } from '../utils/iconMap';
+import { CardViewProps } from '../types';
+import { Phone, Mail, Globe, ExternalLink, Download, MapPin, MessageCircle } from 'lucide-react';
 import { downloadVCard } from '../utils/vcard';
-
-interface CardViewProps {
-    data: ProfileData;
-}
 
 export const CardView: React.FC<CardViewProps> = ({ data }) => {
     const { theme } = data;
