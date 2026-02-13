@@ -26,21 +26,21 @@ export const CardView: React.FC<CardViewProps> = ({ data }) => {
                 }}
             >
                 {/* Cover Image */}
-                <div className="h-32 w-full relative">
+                <div className="h-24 w-full relative">
                     <img src={data.coverUrl} alt="Cover" className="w-full h-full object-cover" />
                     <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/20"></div>
                 </div>
 
                 {/* Profile Content */}
-                <div className="px-6 pb-8 -mt-16 relative z-10">
+                <div className="px-6 pb-8 -mt-12 relative z-10">
                     <div className="flex flex-col items-center">
                         {/* Avatar */}
                         <div className="p-1.5 bg-white/30 backdrop-blur-md rounded-full shadow-lg">
-                            <img src={data.avatarUrl} alt={data.name} className="w-32 h-32 rounded-full object-cover border-4 border-white shadow-sm" />
+                            <img src={data.avatarUrl} alt={data.name} className="w-28 h-28 rounded-full object-cover border-4 border-white shadow-sm" />
                         </div>
 
                         {/* Basic Info */}
-                        <div className="text-center mt-4">
+                        <div className="text-center mt-3">
                             <h1 className="text-2xl font-bold text-gray-800">{data.name}</h1>
                             <p className="text-sm font-medium text-gray-600 mt-1">{data.title} @ {data.company}</p>
                             <p className="text-xs text-gray-500 mt-2 max-w-xs leading-relaxed">{data.bio}</p>
@@ -58,9 +58,9 @@ export const CardView: React.FC<CardViewProps> = ({ data }) => {
                                 href={`https://wa.me/${data.phone?.replace(/[^0-9]/g, '')}`}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="flex flex-col items-center justify-center w-14 h-14 rounded-2xl bg-[#25D366] text-white shadow-sm hover:shadow-md hover:scale-105 transition-all"
+                                className="flex flex-col items-center justify-center w-14 h-14 rounded-2xl bg-white shadow-sm hover:shadow-md hover:scale-105 transition-all text-gray-700"
                             >
-                                <MessageCircle size={20} />
+                                <MessageCircle size={20} className="text-[#25D366]" />
                                 <span className="text-[10px] mt-1 font-medium">WhatsApp</span>
                             </a>
 
