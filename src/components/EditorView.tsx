@@ -204,33 +204,102 @@ export const EditorView: React.FC<EditorViewProps> = ({ data, onChange }) => {
                 <section className="space-y-4 mb-8">
                     <h3 className="text-lg font-semibold text-gray-700">Identity</h3>
 
+                    {/* Avatar Selection */}
                     <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">Avatar</label>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">Avatar</label>
                         <div className="flex flex-col gap-3">
                             <div className="flex items-center gap-4">
-                                <img src={data.avatarUrl} alt="Preview" className="w-12 h-12 rounded-full object-cover border border-gray-200" />
-                                <input
-                                    type="file"
-                                    accept="image/*"
-                                    onChange={(e) => handleFileUpload(e, 'avatarUrl')}
-                                    className="text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 transition-all"
-                                />
+                                {data.avatarUrl?.startsWith('#') ? (
+                                    <div className="w-12 h-12 rounded-full border border-gray-200" style={{ backgroundColor: data.avatarUrl }} />
+                                ) : (
+                                    <img src={data.avatarUrl} alt="Preview" className="w-12 h-12 rounded-full object-cover border border-gray-200" />
+                                )}
+                                <div className="flex flex-col gap-2">
+                                    <div className="flex gap-2">
+                                        <button
+                                            onClick={() => handleChange('avatarUrl', '#000000')}
+                                            className={`px-3 py-1 text-xs rounded-lg border ${data.avatarUrl?.startsWith('#') ? 'bg-gray-900 text-white border-gray-900' : 'bg-white text-gray-600 border-gray-200'}`}
+                                        >
+                                            Color
+                                        </button>
+                                        <button
+                                            onClick={() => handleChange('avatarUrl', '/images/ShapesBL150.png')}
+                                            className={`px-3 py-1 text-xs rounded-lg border ${!data.avatarUrl?.startsWith('#') ? 'bg-gray-900 text-white border-gray-900' : 'bg-white text-gray-600 border-gray-200'}`}
+                                        >
+                                            Image
+                                        </button>
+                                    </div>
+
+                                    {data.avatarUrl?.startsWith('#') ? (
+                                        <div className="flex items-center gap-2">
+                                            <input
+                                                type="color"
+                                                value={data.avatarUrl}
+                                                onChange={(e) => handleChange('avatarUrl', e.target.value)}
+                                                className="w-8 h-8 rounded-full border-0 p-0 overflow-hidden cursor-pointer"
+                                            />
+                                            <span className="text-xs font-mono text-gray-500">{data.avatarUrl}</span>
+                                        </div>
+                                    ) : (
+                                        <input
+                                            type="file"
+                                            accept="image/*"
+                                            onChange={(e) => handleFileUpload(e, 'avatarUrl')}
+                                            className="text-xs text-gray-500 file:mr-2 file:py-1 file:px-3 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 transition-all"
+                                        />
+                                    )}
+                                </div>
                             </div>
                         </div>
                     </div>
 
+                    {/* Cover Selection */}
                     <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">Cover Image</label>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">Cover Image</label>
                         <div className="flex flex-col gap-3">
                             <div className="relative h-16 w-full rounded-lg overflow-hidden border border-gray-200">
-                                <img src={data.coverUrl} alt="Preview" className="w-full h-full object-cover" />
+                                {data.coverUrl?.startsWith('#') ? (
+                                    <div className="w-full h-full" style={{ backgroundColor: data.coverUrl }} />
+                                ) : (
+                                    <img src={data.coverUrl} alt="Preview" className="w-full h-full object-cover" />
+                                )}
                             </div>
-                            <input
-                                type="file"
-                                accept="image/*"
-                                onChange={(e) => handleFileUpload(e, 'coverUrl')}
-                                className="text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 transition-all"
-                            />
+
+                            <div className="flex flex-col gap-2">
+                                <div className="flex gap-2">
+                                    <button
+                                        onClick={() => handleChange('coverUrl', '#000000')}
+                                        className={`px-3 py-1 text-xs rounded-lg border ${data.coverUrl?.startsWith('#') ? 'bg-gray-900 text-white border-gray-900' : 'bg-white text-gray-600 border-gray-200'}`}
+                                    >
+                                        Color
+                                    </button>
+                                    <button
+                                        onClick={() => handleChange('coverUrl', '/images/White.png')}
+                                        className={`px-3 py-1 text-xs rounded-lg border ${!data.coverUrl?.startsWith('#') ? 'bg-gray-900 text-white border-gray-900' : 'bg-white text-gray-600 border-gray-200'}`}
+                                    >
+                                        Image
+                                    </button>
+                                </div>
+
+                                {data.coverUrl?.startsWith('#') ? (
+                                    <div className="flex items-center gap-2">
+                                        <input
+                                            type="color"
+                                            value={data.coverUrl}
+                                            onChange={(e) => handleChange('coverUrl', e.target.value)}
+                                            className="w-8 h-8 rounded-full border-0 p-0 overflow-hidden cursor-pointer"
+                                        />
+                                        <span className="text-xs font-mono text-gray-500">{data.coverUrl}</span>
+                                    </div>
+                                ) : (
+                                    <input
+                                        type="file"
+                                        accept="image/*"
+                                        onChange={(e) => handleFileUpload(e, 'coverUrl')}
+                                        className="text-xs text-gray-500 file:mr-2 file:py-1 file:px-3 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 transition-all"
+                                    />
+                                )}
+                            </div>
                         </div>
                     </div>
                 </section>

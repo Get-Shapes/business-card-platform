@@ -27,7 +27,11 @@ export const CardView: React.FC<CardViewProps> = ({ data }) => {
             >
                 {/* Cover Image */}
                 <div className="h-40 w-full relative">
-                    <img src={data.coverUrl} alt="Cover" className="w-full h-full object-cover" />
+                    {data.coverUrl?.startsWith('#') ? (
+                        <div className="w-full h-full" style={{ backgroundColor: data.coverUrl }} />
+                    ) : (
+                        <img src={data.coverUrl} alt="Cover" className="w-full h-full object-cover" />
+                    )}
                     <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/20"></div>
                 </div>
 
@@ -36,7 +40,11 @@ export const CardView: React.FC<CardViewProps> = ({ data }) => {
                     <div className="flex flex-col items-center">
                         {/* Avatar */}
                         <div className="p-1.5 bg-white/30 backdrop-blur-md rounded-full shadow-lg">
-                            <img src={data.avatarUrl} alt={data.name} className="w-28 h-28 rounded-full object-cover border-4 border-white shadow-sm" />
+                            {data.avatarUrl?.startsWith('#') ? (
+                                <div className="w-28 h-28 rounded-full border-4 border-white shadow-sm" style={{ backgroundColor: data.avatarUrl }} />
+                            ) : (
+                                <img src={data.avatarUrl} alt={data.name} className="w-28 h-28 rounded-full object-cover border-4 border-white shadow-sm" />
+                            )}
                         </div>
 
                         {/* Basic Info */}
