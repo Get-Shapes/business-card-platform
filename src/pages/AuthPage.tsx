@@ -31,6 +31,7 @@ export const AuthPage = () => {
                     password,
                     options: {
                         data: { username },
+                        emailRedirectTo: window.location.origin,
                     },
                 });
                 if (error) throw error;
