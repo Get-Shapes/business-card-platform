@@ -1,9 +1,12 @@
 import React from 'react';
 import type { ProfileData, SocialLink } from '../data/initialData';
 import { getIcon } from '../utils/iconMap';
-import { CardViewProps } from '../types';
-import { Phone, Mail, Globe, Share2, ExternalLink, MessageCircle } from 'lucide-react';
+import { Phone, Mail, Globe, ExternalLink, MessageCircle } from 'lucide-react';
 import { downloadVCard } from '../utils/vcard';
+
+interface CardViewProps {
+    data: ProfileData;
+}
 
 export const CardView: React.FC<CardViewProps> = ({ data }) => {
     const { theme } = data;
@@ -85,7 +88,7 @@ export const CardView: React.FC<CardViewProps> = ({ data }) => {
                         {/* Social Links Grid */}
                         <div className="mt-8 w-full space-y-3">
                             <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3 ml-1">Socials</h3>
-                            {data.socialLinks.filter(l => l.active).map((link) => {
+                            {data.socialLinks.filter((l: SocialLink) => l.active).map((link: SocialLink) => {
                                 const Icon = getIcon(link.icon);
                                 return (
                                     <a key={link.id} href={link.url} target="_blank" rel="noopener noreferrer" className="flex items-center p-4 bg-white/60 hover:bg-white backdrop-blur-sm rounded-xl transition-all shadow-sm hover:shadow-md group">
