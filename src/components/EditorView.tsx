@@ -1,7 +1,9 @@
 import React from 'react';
 import type { ProfileData, SocialLink } from '../data/initialData';
-import { Plus, Trash2, Download } from 'lucide-react';
+import { Plus, Trash2, Download, Upload } from 'lucide-react';
 import { IconMap } from '../utils/iconMap';
+import { supabase } from '../lib/supabase';
+import { toast } from 'sonner';
 
 interface EditorViewProps {
     data: ProfileData;
@@ -11,6 +13,52 @@ interface EditorViewProps {
 export const EditorView: React.FC<EditorViewProps> = ({ data, onChange }) => {
     const handleChange = (field: keyof ProfileData, value: any) => {
         onChange({ ...data, [field]: value });
+    };
+
+    const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>, field: 'avatarUrl' | 'coverUrl') => {
+        const file = e.target.files?.[0];
+        console.log("File selected:", file); // Debug log
+        if (!file) return;
+
+        // Validating file size (max 2MB)
+        if (file.size > 2 * 1024 * 1024) {
+            toast.error("Image too large (max 2MB)");
+            return;
+        }
+
+        const toastId = toast.loading("Uploading image...");
+
+        try {
+            const fileExt = file.name.split('.').pop();
+            const fileName = `${data.id || 'temp'}/${Math.random()}.${fileExt}`;
+
+            console.log("Uploading to path:", fileName); // Debug log
+
+            const { error: uploadError } = await supabase.storage
+                .from('avatars')
+                .upload(fileName, file, {
+                    upsert: true
+                });
+
+            if (uploadError) {
+                console.error("Upload error:", uploadError); // Debug log
+                throw uploadError;
+            }
+
+            const { data: publicUrlData } = supabase.storage
+                .from('avatars')
+                .getPublicUrl(fileName);
+
+            console.log("Public URL:", publicUrlData.publicUrl); // Debug log
+
+            handleChange(field, publicUrlData.publicUrl);
+            toast.success("Image uploaded!");
+        } catch (error: any) {
+            console.error(error);
+            toast.error(`Upload failed: ${error.message}`);
+        } finally {
+            toast.dismiss(toastId);
+        }
     };
 
     const handleThemeChange = (field: keyof ProfileData['theme'], value: any) => {
@@ -150,16 +198,6 @@ export const EditorView: React.FC<EditorViewProps> = ({ data, onChange }) => {
                             className="w-full px-4 py-2 rounded-xl border border-gray-200 bg-gray-50 text-gray-500 cursor-not-allowed outline-none"
                         />
                     </div>
-
-                    <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">Location</label>
-                        <input
-                            type="text"
-                            value={data.location}
-                            onChange={(e) => handleChange('location', e.target.value)}
-                            className="w-full px-4 py-2 rounded-xl border border-gray-200 focus:ring-2 focus:ring-blue-500 outline-none"
-                        />
-                    </div>
                 </section>
 
                 {/* Images */}
@@ -167,29 +205,33 @@ export const EditorView: React.FC<EditorViewProps> = ({ data, onChange }) => {
                     <h3 className="text-lg font-semibold text-gray-700">Identity</h3>
 
                     <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">Avatar URL</label>
-                        <div className="flex gap-2">
-                            <input
-                                type="text"
-                                value={data.avatarUrl}
-                                onChange={(e) => handleChange('avatarUrl', e.target.value)}
-                                className="flex-1 px-4 py-2 rounded-xl border border-gray-200 focus:ring-2 focus:ring-blue-500 outline-none text-sm"
-                                placeholder="https://..."
-                            />
-                            {/* Placeholder for Upload Button - needing Supabase Storage logic next */}
+                        <label className="block text-sm font-medium text-gray-700 mb-1">Avatar</label>
+                        <div className="flex flex-col gap-3">
+                            <div className="flex items-center gap-4">
+                                <img src={data.avatarUrl} alt="Preview" className="w-12 h-12 rounded-full object-cover border border-gray-200" />
+                                <input
+                                    type="file"
+                                    accept="image/*"
+                                    onChange={(e) => handleFileUpload(e, 'avatarUrl')}
+                                    className="text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 transition-all"
+                                />
+                            </div>
                         </div>
-                        <p className="text-xs text-gray-500 mt-1">Paste a URL from LinkedIn or other source.</p>
                     </div>
 
                     <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">Cover URL</label>
-                        <input
-                            type="text"
-                            value={data.coverUrl}
-                            onChange={(e) => handleChange('coverUrl', e.target.value)}
-                            className="w-full px-4 py-2 rounded-xl border border-gray-200 focus:ring-2 focus:ring-blue-500 outline-none text-sm"
-                            placeholder="https://..."
-                        />
+                        <label className="block text-sm font-medium text-gray-700 mb-1">Cover Image</label>
+                        <div className="flex flex-col gap-3">
+                            <div className="relative h-16 w-full rounded-lg overflow-hidden border border-gray-200">
+                                <img src={data.coverUrl} alt="Preview" className="w-full h-full object-cover" />
+                            </div>
+                            <input
+                                type="file"
+                                accept="image/*"
+                                onChange={(e) => handleFileUpload(e, 'coverUrl')}
+                                className="text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 transition-all"
+                            />
+                        </div>
                     </div>
                 </section>
 
