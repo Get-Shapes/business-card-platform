@@ -34,10 +34,41 @@ create policy "Users can update own profile."
   on profiles for update
   using ( auth.uid() = id );
 
--- Set up Storage for Avatars and Covers
-insert into storage.buckets (id, name)
-values ('avatars', 'avatars');
+-- Function to automatically create a profile on signup
+create or replace function public.handle_new_user()
+returns trigger
+language plpgsql
+security definer set search_path = public
+as $$
+begin
+  insert into public.profiles (id, username, full_name, email, company, bio, website, avatar_url, cover_url, theme)
+  values (
+    new.id,
+    split_part(new.email, '@', 1), -- Use email prefix as username
+    coalesce(new.raw_user_meta_data->>'full_name', split_part(new.email, '@', 1)),
+    new.email,
+    'Shapes',
+    'Wearable Science',
+    'https://get-shapes.com',
+    '/images/ShapesBL150.png',
+    '/images/White.png',
+    '{"primaryColor": "#000000", "backgroundColor": "#000000", "cardStyle": "glass"}'::jsonb
+  );
+  return new;
+end;
+$$;
 
+-- Trigger the function every time a user is created
+create or replace trigger on_auth_user_created
+  after insert on auth.users
+  for each row execute procedure public.handle_new_user();
+
+-- Storage bucket for avatars
+insert into storage.buckets (id, name, public)
+values ('avatars', 'avatars', true)
+on conflict (id) do nothing;
+
+-- Storage policies
 create policy "Avatar images are publicly accessible."
   on storage.objects for select
   using ( bucket_id = 'avatars' );

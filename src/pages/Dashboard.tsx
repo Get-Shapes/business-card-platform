@@ -12,6 +12,7 @@ export const Dashboard = () => {
     const [profile, setProfile] = useState<ProfileData>(initialProfile);
     const [loading, setLoading] = useState(true);
     const [saving, setSaving] = useState(false);
+    const [username, setUsername] = useState('');
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -28,6 +29,9 @@ export const Dashboard = () => {
             if (error) {
                 console.error('Error fetching profile:', error);
             } else if (data) {
+                // Set username for public link
+                setUsername(data.username || user.id);
+
                 // Map database fields to application state
                 setProfile({
                     id: data.id,
@@ -138,7 +142,7 @@ export const Dashboard = () => {
             <div className="flex-1 bg-gray-50 relative overflow-y-auto">
                 <div className="absolute top-4 right-4 z-10">
                     <a
-                        href={`/${profile.id}`} // Takes user to public profile (using ID for now, username later)
+                        href={`/${username}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="flex items-center gap-2 px-4 py-2 bg-white rounded-full shadow-sm text-sm font-medium hover:shadow-md transition-all text-gray-700"
