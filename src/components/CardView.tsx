@@ -26,7 +26,6 @@ export const CardView: React.FC<CardViewProps> = ({ data }) => {
                 }}
             >
                 {/* Cover Image */}
-                {/* Cover Image */}
                 <div className="h-40 w-full relative" style={{
                     maskImage: 'linear-gradient(to bottom, black 50%, transparent 100%)',
                     WebkitMaskImage: 'linear-gradient(to bottom, black 50%, transparent 100%)'
