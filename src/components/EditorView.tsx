@@ -264,26 +264,6 @@ export const EditorView: React.FC<EditorViewProps> = ({ data, onChange }) => {
                             </div>
                         </div>
                     </div>
-
-                    <div className="space-y-1">
-                        <label className="text-xs font-medium text-gray-500">Avatar URL</label>
-                        <input
-                            type="url"
-                            value={data.avatarUrl}
-                            onChange={(e) => handleChange('avatarUrl', e.target.value)}
-                            className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-xs"
-                        />
-                    </div>
-
-                    <div className="space-y-1">
-                        <label className="text-xs font-medium text-gray-500">Cover URL</label>
-                        <input
-                            type="url"
-                            value={data.coverUrl}
-                            onChange={(e) => handleChange('coverUrl', e.target.value)}
-                            className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-xs"
-                        />
-                    </div>
                 </section>
 
                 {/* Social Links */}

@@ -26,13 +26,13 @@ export const CardView: React.FC<CardViewProps> = ({ data }) => {
                 }}
             >
                 {/* Cover Image */}
-                <div className="h-20 w-full relative">
+                <div className="h-40 w-full relative">
                     <img src={data.coverUrl} alt="Cover" className="w-full h-full object-cover" />
                     <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/20"></div>
                 </div>
 
                 {/* Profile Content */}
-                <div className="px-6 pb-8 -mt-12 relative z-10">
+                <div className="px-6 pb-8 -mt-16 relative z-10">
                     <div className="flex flex-col items-center">
                         {/* Avatar */}
                         <div className="p-1.5 bg-white/30 backdrop-blur-md rounded-full shadow-lg">
