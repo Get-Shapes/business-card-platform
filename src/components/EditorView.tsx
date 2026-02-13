@@ -66,78 +66,126 @@ export const EditorView: React.FC<EditorViewProps> = ({ data, onChange }) => {
 
             <div className="space-y-6">
                 {/* Basic Info */}
-                <section className="space-y-4">
-                    <h3 className="text-lg font-semibold text-gray-700 border-b pb-2">Basic Info</h3>
-                    <div className="grid grid-cols-2 gap-4">
-                        <div className="space-y-1">
-                            <label className="text-xs font-medium text-gray-500">Name</label>
+                <section className="space-y-4 mb-8">
+                    <h3 className="text-lg font-semibold text-gray-700">Basic Info</h3>
+
+                    <div className="grid grid-cols-1 gap-4">
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
                             <input
                                 type="text"
                                 value={data.name}
                                 onChange={(e) => handleChange('name', e.target.value)}
-                                className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
+                                className="w-full px-4 py-2 rounded-xl border border-gray-200 focus:ring-2 focus:ring-blue-500 outline-none"
+                                placeholder="Your Name"
                             />
                         </div>
-                        <div className="space-y-1">
-                            <label className="text-xs font-medium text-gray-500">Title</label>
+
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-1">Company Role</label>
                             <input
                                 type="text"
                                 value={data.title}
                                 onChange={(e) => handleChange('title', e.target.value)}
-                                className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
+                                className="w-full px-4 py-2 rounded-xl border border-gray-200 focus:ring-2 focus:ring-blue-500 outline-none"
+                                placeholder="e.g. Designer"
+                            />
+                        </div>
+
+                        {/* Locked Company & Bio (Hidden or Readonly) */}
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-1">Company</label>
+                            <input
+                                type="text"
+                                value={data.company}
+                                readOnly
+                                className="w-full px-4 py-2 rounded-xl border border-gray-200 bg-gray-50 text-gray-500 cursor-not-allowed outline-none"
                             />
                         </div>
                     </div>
-                    <div className="space-y-1">
-                        <label className="text-xs font-medium text-gray-500">Company</label>
+                </section>
+
+                {/* Contact Info */}
+                <section className="space-y-4 mb-8">
+                    <h3 className="text-lg font-semibold text-gray-700">Contact</h3>
+
+                    {/* Helper function to handle email change */}
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                        <div className="flex items-center">
+                            <input
+                                type="text"
+                                value={data.email.split('@')[0]}
+                                onChange={(e) => handleChange('email', `${e.target.value}@get-shapes.com`)}
+                                className="flex-1 px-4 py-2 rounded-l-xl border border-gray-200 focus:ring-2 focus:ring-blue-500 outline-none border-r-0"
+                                placeholder="name"
+                            />
+                            <span className="px-4 py-2 bg-gray-100 border border-gray-200 rounded-r-xl text-gray-500 font-medium">
+                                @get-shapes.com
+                            </span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">Phone / WhatsApp</label>
+                        <input
+                            type="tel"
+                            value={data.phone}
+                            onChange={(e) => handleChange('phone', e.target.value)}
+                            className="w-full px-4 py-2 rounded-xl border border-gray-200 focus:ring-2 focus:ring-blue-500 outline-none"
+                            placeholder="+1 234 567 890"
+                        />
+                        <p className="text-xs text-gray-500 mt-1">Include country code for WhatsApp (e.g. +1...)</p>
+                    </div>
+
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">Website</label>
                         <input
                             type="text"
-                            value={data.company}
-                            onChange={(e) => handleChange('company', e.target.value)}
-                            className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
+                            value={data.website}
+                            readOnly
+                            className="w-full px-4 py-2 rounded-xl border border-gray-200 bg-gray-50 text-gray-500 cursor-not-allowed outline-none"
                         />
                     </div>
-                    <div className="space-y-1">
-                        <label className="text-xs font-medium text-gray-500">Bio</label>
-                        <textarea
-                            value={data.bio}
-                            onChange={(e) => handleChange('bio', e.target.value)}
-                            rows={3}
-                            className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all resize-none"
+
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">Location</label>
+                        <input
+                            type="text"
+                            value={data.location}
+                            onChange={(e) => handleChange('location', e.target.value)}
+                            className="w-full px-4 py-2 rounded-xl border border-gray-200 focus:ring-2 focus:ring-blue-500 outline-none"
                         />
                     </div>
                 </section>
 
-                {/* Contact */}
-                <section className="space-y-4">
-                    <h3 className="text-lg font-semibold text-gray-700 border-b pb-2">Contact</h3>
-                    <div className="grid grid-cols-2 gap-4">
-                        <div className="space-y-1">
-                            <label className="text-xs font-medium text-gray-500">Email</label>
+                {/* Images */}
+                <section className="space-y-4 mb-8">
+                    <h3 className="text-lg font-semibold text-gray-700">Identity</h3>
+
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">Avatar URL</label>
+                        <div className="flex gap-2">
                             <input
-                                type="email"
-                                value={data.email}
-                                onChange={(e) => handleChange('email', e.target.value)}
-                                className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
+                                type="text"
+                                value={data.avatarUrl}
+                                onChange={(e) => handleChange('avatarUrl', e.target.value)}
+                                className="flex-1 px-4 py-2 rounded-xl border border-gray-200 focus:ring-2 focus:ring-blue-500 outline-none text-sm"
+                                placeholder="https://..."
                             />
+                            {/* Placeholder for Upload Button - needing Supabase Storage logic next */}
                         </div>
-                        <div className="space-y-1">
-                            <label className="text-xs font-medium text-gray-500">Phone</label>
-                            <input
-                                type="tel"
-                                value={data.phone}
-                                onChange={(e) => handleChange('phone', e.target.value)}
-                                className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
-                            />
-                        </div>
+                        <p className="text-xs text-gray-500 mt-1">Paste a URL from LinkedIn or other source.</p>
                     </div>
-                    <div className="space-y-1">
-                        <label className="text-xs font-medium text-gray-500">Website</label>
+
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">Cover URL</label>
                         <input
-                            type="url"
-                            value={data.website}
-                            onChange={(e) => handleChange('website', e.target.value)}
-                            className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
+                            type="text"
+                            value={data.coverUrl}
+                            onChange={(e) => handleChange('coverUrl', e.target.value)}
+                            className="w-full px-4 py-2 rounded-xl border border-gray-200 focus:ring-2 focus:ring-blue-500 outline-none text-sm"
+                            placeholder="https://..."
                         />
                     </div>
                 </section>

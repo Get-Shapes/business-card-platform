@@ -29,20 +29,29 @@ export interface ProfileData {
 
 export const initialProfile: ProfileData = {
     id: 'demo',
-    name: 'Your Name',
-    title: 'Job Title',
-    company: 'Company Name',
-    bio: 'A short bio about yourself and what you do.',
-    avatarUrl: 'https://images.unsplash.com/photo-1633332755192-727a05c4013d?w=400&h=400&q=80', // Generic avatar
-    coverUrl: 'https://images.unsplash.com/photo-1557683316-973673baf926?w=1000&q=80', // Generic gradient
-    email: 'email@example.com',
-    phone: '+1 234 567 8900',
+    name: '', // Empty by default so user types it
+    title: 'Company Role',
+    company: 'Shapes',
+    bio: 'Wearable Science',
+    avatarUrl: '/images/ShapesBL150.png',
+    coverUrl: '/images/White.png',
+    email: '', // Logic will handle the @get-shapes.com part
+    phone: '',
     location: 'City, Country',
-    website: 'https://example.com',
-    socialLinks: [],
+    website: 'https://get-shapes.com',
+    socialLinks: [
+        {
+            id: 'linkedin',
+            platform: 'linkedin',
+            url: 'https://linkedin.com',
+            icon: 'Linkedin',
+            label: 'LinkedIn',
+            active: true,
+        }
+    ],
     theme: {
-        primaryColor: '#000000',
-        backgroundColor: '#f3f4f6',
+        primaryColor: '#000000', // Black accent
+        backgroundColor: '#000000', // Black background
         cardStyle: 'glass',
     },
 };
