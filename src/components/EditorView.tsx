@@ -1,6 +1,6 @@
 import React from 'react';
 import type { ProfileData, SocialLink } from '../data/initialData';
-import { Plus, Trash2, Download, Upload } from 'lucide-react';
+import { Plus, Trash2, Download } from 'lucide-react';
 import { IconMap } from '../utils/iconMap';
 import { supabase } from '../lib/supabase';
 import { toast } from 'sonner';
