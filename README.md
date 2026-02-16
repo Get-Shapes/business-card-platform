@@ -1,73 +1,32 @@
-# React + TypeScript + Vite
+# Sascha Zeissler - Digital Business Card
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A minimalist, dark-themed digital business card for mobile devices.
 
-Currently, two official plugins are available:
+## 🎨 Features
+- **Mobile-first design** optimized for QR code scanning
+- **Dark minimalist aesthetic** inspired by Apple Card
+- **BrutalType font** with Shapes branding
+- **One-click contact** via WhatsApp, LinkedIn, Email, and Website
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Live Demo
+Visit: [https://get-shapes.github.io/business-card-platform/](https://get-shapes.github.io/business-card-platform/)
 
-## React Compiler
+## 📱 Usage
+Scan the QR code on my business card to access this digital version with all my contact information.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🛠️ Technical Details
+- **100% standalone HTML** - No build process required
+- **Embedded fonts** - BrutalType for consistent branding
+- **Local images** - Shapes logos included
+- **GitHub Pages** - Simple, free hosting
 
-## Expanding the ESLint configuration
+## ✏️ Customization
+Simply edit `index.html` to update:
+- Contact information
+- Links (WhatsApp, LinkedIn, Email, Website)
+- Colors and styling
+- Logo images
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+**Shapes · Wearable Science**
